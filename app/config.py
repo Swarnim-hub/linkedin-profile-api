@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     # Obtained from logged-in browser session cookies
     LINKEDIN_LI_AT: Optional[str] = None
     LINKEDIN_JSESSIONID: Optional[str] = None
+    LINKEDIN_COOKIE_STR: Optional[str] = None
 
     # Application settings
     APP_NAME: str = "LinkedIn Profile Scraper API"

@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 
 def extract_image_url(image_obj: Optional[Dict[str, Any]]) -> Optional[str]:
-    """Extract the highest resolution image URL from a LinkedIn VectorImage object."""
+    """Extract the highest resolution image URL from a LinkedIn VectorImage or PhotoFilterPicture object."""
     if not image_obj or not isinstance(image_obj, dict):
         return None
 
@@ -28,8 +28,15 @@ def extract_image_url(image_obj: Optional[Dict[str, Any]]) -> Optional[str]:
     if "url" in image_obj and isinstance(image_obj["url"], str):
         return image_obj["url"]
 
+    # Check if this is a PhotoFilterPicture or container holding displayImage/displayImageReference/originalImage
+    for nested_key in ["displayImage", "displayImageReference", "originalImage", "originalImageReference"]:
+        if nested_key in image_obj and isinstance(image_obj[nested_key], dict):
+            url = extract_image_url(image_obj[nested_key])
+            if url:
+                return url
+
     # LinkedIn VectorImage structure
-    vector_img = image_obj.get("com.linkedin.common.VectorImage", image_obj)
+    vector_img = image_obj.get("vectorImage", image_obj.get("com.linkedin.common.VectorImage", image_obj))
     if not isinstance(vector_img, dict):
         return None
 
@@ -348,11 +355,11 @@ def parse_dash_profile(raw: Dict[str, Any], public_id: str) -> ProfileResponse:
             industry = item.get("industryName") or industry
 
             # Picture resolution
-            pic_obj = item.get("profilePicture", {}).get("displayImageReference", {})
             if not profile_pic:
-                profile_pic = extract_image_url(pic_obj) or extract_image_url(item.get("picture"))
+                pic_obj = item.get("profilePicture") or item.get("picture")
+                profile_pic = extract_image_url(pic_obj)
             if not bg_pic:
-                bg_pic = extract_image_url(item.get("backgroundPicture"))
+                bg_pic = extract_image_url(item.get("backgroundPicture") or item.get("backgroundPictures"))
 
         # Position / Experience entity
         elif "identity.profile.Position" in item_type or "PositionGroup" in item_type or item_type.endswith(".Position"):

@@ -8,14 +8,14 @@ Built with **FastAPI**, **httpx (async)**, and **Pydantic v2**. Fully deployable
 
 ## 🌐 Live Hosted API (Public HTTPS)
 
-- **Base API URL**: `https://specs-transformation-acquired-also.trycloudflare.com`
-- **Interactive Swagger Docs**: [`https://specs-transformation-acquired-also.trycloudflare.com/docs`](https://specs-transformation-acquired-also.trycloudflare.com/docs)
-- **Interactive ReDoc**: [`https://specs-transformation-acquired-also.trycloudflare.com/redoc`](https://specs-transformation-acquired-also.trycloudflare.com/redoc)
-- **Health Check**: [`https://specs-transformation-acquired-also.trycloudflare.com/health`](https://specs-transformation-acquired-also.trycloudflare.com/health)
+- **Base API URL**: `https://syracuse-subscriber-settled-suspension.trycloudflare.com`
+- **Interactive Swagger Docs**: [`https://syracuse-subscriber-settled-suspension.trycloudflare.com/docs`](https://syracuse-subscriber-settled-suspension.trycloudflare.com/docs)
+- **Interactive ReDoc**: [`https://syracuse-subscriber-settled-suspension.trycloudflare.com/redoc`](https://syracuse-subscriber-settled-suspension.trycloudflare.com/redoc)
+- **Health Check**: [`https://syracuse-subscriber-settled-suspension.trycloudflare.com/health`](https://syracuse-subscriber-settled-suspension.trycloudflare.com/health)
 
 ### Quick cURL Example
 ```bash
-curl -X POST "https://specs-transformation-acquired-also.trycloudflare.com/api/profile" \
+curl -X POST "https://syracuse-subscriber-settled-suspension.trycloudflare.com/api/profile" \
   -H "Content-Type: application/json" \
   -d '{"linkedin_url": "https://www.linkedin.com/in/williamhgates/"}'
 ```
